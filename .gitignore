@@ -1,0 +1,47 @@
+# Criar arquivo .gitignore
+cat > .gitignore << 'EOF'
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Ambiente
+.env
+.env.local
+.env.production
+
+# Build
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testes
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+prisma/.env
+
+# Docker
+docker/data/
+docker/volumes/
+
+# Temp
+tmp/
+temp/
+EOF
