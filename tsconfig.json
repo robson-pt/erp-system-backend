@@ -15,7 +15,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@prisma": ["generated/prisma"]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -24,5 +25,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src", "generated", "test-tenant.ts"]
 }

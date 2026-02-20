@@ -8,27 +8,31 @@ export type RequestContextType = {
 
 const storage = new AsyncLocalStorage<RequestContextType>();
 
-class RequestContextService {
-  run(data: RequestContextType, callback: () => void): void {
+export class RequestContext {
+  static run(data: RequestContextType, callback: () => void): void {
     storage.run(data, callback);
   }
 
-  get(): RequestContextType | undefined {
+  static get(): RequestContextType | undefined {
     return storage.getStore();
   }
 
-  set<K extends keyof RequestContextType>(
+  static set<K extends keyof RequestContextType>(
     key: K,
     value: RequestContextType[K],
   ): void {
     const store = storage.getStore();
-
     if (!store) {
-      throw new Error('RequestContext not initialized');
+      throw new Error('RequestContext não inicializado');
     }
-
     store[key] = value;
   }
-}
 
-export const RequestContext = new RequestContextService();
+  static getTenantId(): string {
+    const context = this.get();
+    if (!context?.tenantId) {
+      throw new Error('Tenant não encontrado no contexto');
+    }
+    return context.tenantId;
+  }
+}
